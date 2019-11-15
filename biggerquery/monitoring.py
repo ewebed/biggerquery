@@ -166,7 +166,7 @@ class FakeJob(object):
 if __name__ == '__main__':
     monitoring_config = MonitoringConfig(
         project_id='',
-        location='europe-west1',
+        location='',
         environment_name='some composer')
 
     job = meter_job_failures(FakeJob('fake_monitored_job'), monitoring_config)
