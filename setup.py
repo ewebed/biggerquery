@@ -9,22 +9,25 @@ with open("README.md", "r") as fh:
 with open(os.path.join('requirements', 'base.txt'), 'r') as base_requirements:
     install_requires = [l.strip() for l in base_requirements.readlines()]
 
-with open(os.path.join('requirements', 'beam_extras.txt'), 'r') as beam_extras_requirements:
-    beam_extras_require = [l.strip() for l in beam_extras_requirements.readlines()]
+with open(os.path.join('requirements', 'monitoring_extras.txt'), 'r') as monitoring_extras_requirements:
+    monitoring_extras_require = [l.strip() for l in monitoring_extras_requirements.readlines()]
+
+with open(os.path.join('requirements', 'bigquery_extras.txt'), 'r') as bigquery_extras_requirements:
+    bigquery_extras_require = [l.strip() for l in bigquery_extras_requirements.readlines()]
 
 
 setuptools.setup(
-    name="biggerquery",
-    version="0.6.dev1",
+    name="bigflow",
+    version="1.0.dev35",
     author=u"Chi",
     author_email="chibox-team@allegrogroup.com",
     description="BigQuery client wrapper with clean API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/allegro/biggerquery",
+    url="https://github.com/allegro/bigflow",
     packages=setuptools.find_packages(exclude=('test', 'e2e')),
     data_files=[
-        ('requirements', ['requirements/base.txt', 'requirements/beam_extras.txt']),
+        ('requirements', ['requirements/base.txt', 'requirements/monitoring_extras.txt', 'requirements/bigquery_extras.txt']),
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -32,6 +35,8 @@ setuptools.setup(
     ],
     install_requires=install_requires,
     extras_require={
-        'beam': beam_extras_require,
+        'monitoring': monitoring_extras_require,
+        'bigquery': bigquery_extras_require
     },
+    scripts=["scripts/bf", "scripts/bigflow"]
 )
