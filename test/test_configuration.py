@@ -153,6 +153,13 @@ class TestConfig(TestCase):
         self.assertEqual(config.resolve(), {'a': 'prod2'})
 
 
+    def test_should_raise_an_error_when_docker_repository_not_in_lower_case(self):
+        with self.assertRaises(ValueError):
+            Config('dev', {'docker_repository': 'docker_repository'})
+        with self.assertRaises(ValueError):
+            Config('dev', {'docker_repository': 'docker_repository'}).add_configuration('prod', {'docker_repository': 'Docker_repository'})
+
+
     def test_should_raise_Error_no_explicit_env_is_given_nor_default_env_is_defined(self):
         with self.assertRaises(ValueError):
             Config('dev', {'a': 1}, is_default=False).resolve()
